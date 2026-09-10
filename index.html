@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The $1 Wealth Blueprint | Fast-Track Your Financial Freedom</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Razorpay Checkout Script -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between">
+
+  <!-- Navigation / Simple Header -->
+  <header class="py-6 border-b border-slate-800 text-center">
+    <span class="text-xs uppercase tracking-widest text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-500/30 px-3 py-1 rounded-full">
+      Flash Sale • Limited Time Offer
+    </span>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="max-w-3xl mx-auto px-6 py-12 text-center">
+    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+      Stop Trading Time for Money. Grab <span class="text-emerald-400">The $1 Wealth Blueprint.</span>
+    </h1>
+    
+    <p class="mt-6 text-lg sm:text-xl text-slate-300 leading-relaxed max-w-2xl mx-auto">
+      The no-BS, actionable guide detailing the exact frameworks used by top earners to generate passive income and build lasting wealth.
+    </p>
+
+    <!-- Value Stack / Features -->
+    <div class="mt-10 bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 text-left shadow-2xl">
+      <h3 class="text-xl font-bold text-white mb-4">What's Inside This 45-Page Blueprint:</h3>
+      <ul class="space-y-3 text-slate-300">
+        <li class="flex items-start">
+          <svg class="w-5 h-5 text-emerald-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          <span><strong>The 3-Pillar Framework:</strong> Learn how to turn 1 hour a day into an evergreen digital asset.</span>
+        </li>
+        <li class="flex items-start">
+          <svg class="w-5 h-5 text-emerald-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          <span><strong>The Cashflow Checklist:</strong> Cut unnecessary expenses and redirect capital to high-yield avenues.</span>
+        </li>
+        <li class="flex items-start">
+          <svg class="w-5 h-5 text-emerald-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          <span><strong>Automated Systems:</strong> The exact zero-cost tech stack to run an online business passively.</span>
+        </li>
+      </ul>
+      <div class="mt-6 p-4 bg-emerald-950/40 border border-emerald-500/20 rounded-xl text-sm text-emerald-300">
+        🚀 <strong>Instant Delivery:</strong> Enter your email below, complete checkout, and the PDF will hit your inbox within seconds.
+      </div>
+    </div>
+
+    <!-- Lead / Checkout Box -->
+    <div class="mt-10 max-w-md mx-auto bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+      <div class="flex justify-between items-baseline mb-6">
+        <span class="text-slate-400">Regular Price: <span class="line-through">$27</span></span>
+        <span class="text-3xl font-extrabold text-white">$1 <span class="text-xs text-slate-400 font-normal">USD (approx. ₹85)</span></span>
+      </div>
+
+      <form id="purchase-form" class="space-y-4 text-left">
+        <div>
+          <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Full Name</label>
+          <input type="text" id="name" required placeholder="John Doe" 
+                 class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        </div>
+        <div>
+          <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Email (Where the PDF will be sent)</label>
+          <input type="email" id="email" required placeholder="you@example.com" 
+                 class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        </div>
+
+        <button type="submit" id="pay-btn" 
+                class="w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold rounded-lg transition duration-200 shadow-lg shadow-emerald-500/20 text-lg">
+          Get Instant Access for $1 →
+        </button>
+      </form>
+
+      <p class="text-xs text-slate-500 mt-4">256-Bit SSL Encrypted • Powered by Razorpay</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-8 text-center text-xs text-slate-600 border-t border-slate-900">
+    &copy; <span id="year"></span> The Wealth Blueprint. All Rights Reserved.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // --- RAZORPAY FRONTEND CONFIGURATION ---
+    // NOTE: Replace with your actual Razorpay Key ID (rzp_live_... or rzp_test_...)
+    const RAZORPAY_KEY_ID = "YOUR_RAZORPAY_KEY_ID";
+
+    document.getElementById("purchase-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+
+      if (!name || !email) {
+        alert("Please fill in both name and email.");
+        return;
+      }
+
+      // Configure Razorpay checkout modal
+      // Amount is in base currency subunits (e.g. 100 paise = 1 INR, or 100 cents = $1 USD)
+      const options = {
+        "key": RAZORPAY_KEY_ID,
+        "amount": "100", // $1.00 USD (in cents) or ₹85 INR -> 8500 paise
+        "currency": "USD", // Use 'INR' or 'USD' depending on your account settings
+        "name": "The Wealth Blueprint",
+        "description": "The $1 Wealth Blueprint PDF Download",
+        "prefill": {
+          "name": name,
+          "email": email
+        },
+        "theme": {
+          "color": "#10b981"
+        },
+        "handler": function (response) {
+          // Triggered when payment succeeds in the browser
+          window.location.href = `thank-you.html?email=${encodeURIComponent(email)}`;
+        }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    });
+  </script>
+</body>
+</html>
